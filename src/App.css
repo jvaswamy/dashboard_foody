@@ -1,0 +1,147 @@
+* {
+  box-sizing: border-box;
+  padding: 0px;
+  margin: 0px;
+}
+
+/* Navbar styles */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  background-color: #2c3e50;
+  color: white;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 78px;
+  z-index: 1000;
+}
+
+.logo-container {
+  display: flex;
+  /* align-items: center; */
+}
+
+.logo-text {
+  font-size: 24px;
+  /* font-weight: bolder; */
+  color: rgb(255, 17, 0);
+  align-self: flex-end;
+}
+.restaurant-logo {
+  margin-right: 2px;
+  font-size: 45px;
+  /* font-weight: bold; */
+  color: rgb(255, 17, 0);
+}
+.icon {
+  font-size: 40px;
+  display: none;
+}
+
+.navbar .firm-name-container {
+  display: flex;
+  align-items: center;
+}
+
+.navbar .firm-name {
+  font-size: 20px;
+  font-weight: bold;
+}
+.navbar button {
+  background-color: #dc2626;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  font-size: 14px;
+  cursor: pointer;
+}
+.navbar button:hover {
+  background-color: #b91c1c;
+}
+
+/* Sidebar styles */
+.sidebar {
+  width: 250px;
+  background-color: #34495e;
+  color: white;
+  padding: 1rem 0;
+  position: fixed;
+  top: 78px;
+  bottom: 0;
+  left: 0;
+  overflow-y: auto;
+}
+
+.sidebar-menu {
+  list-style: none;
+}
+
+.sidebar-menu li {
+  padding: 1rem 2rem;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.sidebar-menu li:hover {
+  background-color: #2c3e50;
+}
+
+.sidebar-menu li.active {
+  /* background-color: #2980b9; */
+  background-color: #475569;
+  color: white;
+}
+
+.sidebar-menu li.isShow {
+  background-color: red;
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+  .navbar {
+    padding: 1rem;
+  }
+  .icon {
+    display: none;
+  }
+
+  .sidebar {
+    width: 200px;
+  }
+
+  .content {
+    margin-left: 200px;
+    padding: 1rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .logo-container {
+    display: none;
+  }
+  .icon {
+    display: inline;
+  }
+  .firm-name-container .firm-name {
+    display: none;
+  }
+
+  .sidebar {
+    transform: translateX(-100%);
+    width: 250px;
+  }
+
+  .sidebar.open {
+    width: 200px;
+    transform: translateX(0);
+  }
+
+  .content {
+    margin-left: 0;
+  }
+}
