@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Cookies from "js-cookie";
+import { ClipLoader } from "react-spinners";
 import { API_URL } from "../../data/apiPath";
-import { ColorRing } from "react-loader-spinner";
 import "./Form.css";
 
 const Login = (props) => {
@@ -77,11 +77,7 @@ const Login = (props) => {
 
         <button type="submit" className="submit-btn">
           {loading ? (
-            <ColorRing
-              height="30"
-              width="30"
-              colors={["#ffffff", "#ffffff", "#ffffff", "#ffffff", "#ffffff"]}
-            />
+            <ClipLoader loading size={21} speedMultiplier={1} />
           ) : (
             "Login"
           )}

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
+import { ClipLoader } from "react-spinners";
 import { API_URL } from "../../data/apiPath";
-import { ColorRing } from "react-loader-spinner";
 
 const Register = (props) => {
   const [username, setUserName] = useState("");
@@ -91,11 +91,7 @@ const Register = (props) => {
 
         <button type="submit" className="submit-btn">
           {loading ? (
-            <ColorRing
-              height="30"
-              width="30"
-              colors={["#ffffff", "#ffffff", "#ffffff", "#ffffff", "#ffffff"]}
-            />
+            <ClipLoader loading size={21} speedMultiplier={1} />
           ) : (
             "Register"
           )}
