@@ -11,6 +11,7 @@ import NotFound from "./NotFound";
 import AddFirm from "../components/forms/AddFirm";
 import AddProduct from "../components/forms/AddProduct";
 import AllProducts from "../components/AllProducts";
+import UserDetails from "./UserDetails";
 
 const Home = () => {
   const [activeLayout, setActiveLayout] = useState("");
@@ -51,7 +52,7 @@ const Home = () => {
       case "dashboard":
         return <AllProducts />;
       case "userDetails":
-        return <h1>User details page</h1>;
+        return <UserDetails/>;
       default:
         return <Welcome />;
     }

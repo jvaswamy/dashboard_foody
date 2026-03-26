@@ -176,6 +176,7 @@ form fieldset {
 
 input[type="text"],
 input[type="number"],
+select,
 textarea,
 input[type="file"] {
   width: 100%;

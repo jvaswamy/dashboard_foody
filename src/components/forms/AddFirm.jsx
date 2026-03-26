@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { API_URL } from "../../data/apiPath";
 import Cookies from "js-cookie";
 
@@ -12,6 +12,14 @@ const AddFirm = () => {
     region: [],
   });
   const [imagePreview, setImagePreview] = useState(null);
+
+  useEffect(() => {
+    return () => {
+      if (imagePreview) {
+        URL.revokeObjectURL(imagePreview);
+      }
+    };
+  }, [imagePreview]);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -32,11 +40,14 @@ const AddFirm = () => {
   const handleImageUpload = (e) => {
     const file = e.target.files[0];
     if (file) {
+      if (imagePreview) {
+        URL.revokeObjectURL(imagePreview);
+      }
+
       setFormData((prev) => ({
         ...prev,
         image: file,
       }));
-      // setFile(file);
       setImagePreview(URL.createObjectURL(file));
     }
   };
@@ -53,7 +64,10 @@ const AddFirm = () => {
       data.append("firmName", formData.firmName);
       data.append("area", formData.area);
       data.append("offer", formData.offer);
-      data.append("image", formData.image);
+
+      if (formData.image) {
+        data.append("image", formData.image);
+      }
 
       formData.category.forEach((value) => {
         data.append("category", value);
@@ -73,10 +87,28 @@ const AddFirm = () => {
 
       const response = await fetch(url, options);
       const result = await response.json();
+
+      if (!response.ok) {
+        throw new Error(result.message || result.error || "Failed to add firm");
+      }
+
       alert("Add firm successfully");
+      setFormData({
+        firmName: "",
+        area: "",
+        category: [],
+        offer: "",
+        image: null,
+        region: [],
+      });
+
+      if (imagePreview) {
+        URL.revokeObjectURL(imagePreview);
+      }
+      setImagePreview(null);
     } catch (error) {
       console.log("Error", error);
-      alert(error);
+      alert(error.message);
     }
   };
 
