@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from "react";
 import Cookies from "js-cookie";
 const menuItems = [
-  { key: "firm", label: "Add Firm" },
-  { key: "addProduct", label: "Add Product" },
+  { key: "firm", label: "Add Item" },
+  { key: "orders", label: "Orders" },
   { key: "dashboard", label: "All Products" },
-  { key: "userDetails", label: "User Details" },
 ];
 
 const Sidebar = (props) => {

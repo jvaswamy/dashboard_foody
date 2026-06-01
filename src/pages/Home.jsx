@@ -8,20 +8,16 @@ import Cookies from "js-cookie";
 import { useNavigate } from "react-router-dom";
 import Welcome from "./Welcome";
 import NotFound from "./NotFound";
-import AddFirm from "../components/forms/AddFirm";
-import AddProduct from "../components/forms/AddProduct";
 import AllProducts from "../components/AllProducts";
-import UserDetails from "./UserDetails";
+import AddItem from "../components/forms/AddItem";
+import Orders from "../components/forms/Orders";
+import { assets } from "../../public/assets/assets";
 
 const Home = () => {
   const [activeLayout, setActiveLayout] = useState("");
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [showFirm, setShowFirm] = useState(false);
   const [sidebarOption, setSidebarOption] = useState("");
-  // const [showAddFirm, setShowAddFirm] = useState(false);
-  // const [showAddProduct, setShowAddProduct] = useState(false);
-  // const [showAllProducts, setShowAllProducts] = useState(false);
-  // const [showUserDetails, setShowUserDetails] = useState(false);
 
   const navigate = useNavigate();
   const firmName = localStorage.getItem("firmName");
@@ -46,13 +42,12 @@ const Home = () => {
   const renderContent = (option) => {
     switch (option) {
       case "firm":
-        return <AddFirm />;
-      case "addProduct":
-        return <AddProduct />;
+        return <AddItem />;
+      case "orders":
+        return <Orders url={API_URL} />;
       case "dashboard":
         return <AllProducts />;
-      case "userDetails":
-        return <UserDetails/>;
+
       default:
         return <Welcome />;
     }
@@ -85,7 +80,10 @@ const Home = () => {
             <span className="firm-name">{`Firm Name : ${firmName}`}</span>
           )}
         </div>
-        <button onClick={handleLogout}>Logout</button>
+        <div className="navbar-right">
+          <img src={assets.profile_image} alt="" />
+          <button onClick={handleLogout}>Logout</button>
+        </div>
       </nav>
       <div className="main-container">
         <Sidebar

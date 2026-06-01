@@ -113,7 +113,7 @@ const AddProduct = () => {
             Authorization: `Bearer ${token}`,
           },
           body: data,
-        }
+        },
       );
 
       const result = await response.json();
@@ -149,124 +149,49 @@ const AddProduct = () => {
   };
 
   return (
-    <div className="form-container">
-      <h2>Add Product</h2>
-      <form onSubmit={handleSubmit}>
-        <label>
-          Select Firm:
-          <select
-            name="firmId"
-            value={formData.firmId}
-            onChange={handleChange}
-            required
-            disabled={firmsLoading || firms.length === 0}
-          >
-            <option value="">
-              {firmsLoading ? "Loading firms..." : "Select Firm"}
-            </option>
-            {firms.map((firm) => (
-              <option key={firm._id} value={firm._id}>
-                {firm.firmName}
-              </option>
-            ))}
-          </select>
-        </label>
-
-        {firmsError && <p>{firmsError}</p>}
-
-        <label>
-          Product Name:
-          <input
-            type="text"
-            name="productName"
-            value={formData.productName}
-            onChange={handleChange}
-            required
-          />
-        </label>
-
-        <label>
-          Price:
-          <input
-            type="number"
-            name="price"
-            value={formData.price}
-            onChange={handleChange}
-            required
-          />
-        </label>
-
-        <fieldset>
-          <legend>Category:</legend>
-          <label>
-            <input
-              type="checkbox"
-              name="category"
-              value="veg"
-              checked={formData.category.includes("veg")}
-              onChange={handleChange}
-            />
-            Veg
+    <div className="add">
+      <form className="flex-col">
+        <div className="add-image-upload flex-col">
+          <p>Upload Image</p>
+          <label htmlFor="image">
+            <img src={assets.upload_area} alt="Upload" />
           </label>
-          <label>
-            <input
-              type="checkbox"
-              name="category"
-              value="non-veg"
-              checked={formData.category.includes("non-veg")}
-              onChange={handleChange}
-            />
-            Non-Veg
-          </label>
-        </fieldset>
-
-        <fieldset>
-          <legend>Best Seller:</legend>
-          <label>
-            <input
-              type="radio"
-              name="bestSeller"
-              value="yes"
-              checked={formData.bestSeller === "yes"}
-              onChange={handleChange}
-            />
-            Yes
-          </label>
-          <label>
-            <input
-              type="radio"
-              name="bestSeller"
-              value="no"
-              checked={formData.bestSeller === "no"}
-              onChange={handleChange}
-            />
-            No
-          </label>
-        </fieldset>
-
-        <label>
-          Description:
+          <input type="file" id="image" hidden required />
+        </div>
+        <div className="add-product-name flex-col">
+          <p>Product Name</p>
+          <input type="text" name="name" placeholder="Type here" />
+        </div>
+        <div className="add-product-description flex-col">
+          <p>Product Description</p>
           <textarea
             name="description"
-            value={formData.description}
-            onChange={handleChange}
+            rows="6"
+            placeholder="Write content here"
             required
           ></textarea>
-        </label>
-
-        <label>
-          Upload Image:
-          <input type="file" name="image" accept="image/*" onChange={handleChange} />
-        </label>
-
-        {imagePreview && (
-          <div className="image-preview">
-            <img src={imagePreview} alt="Preview" />
+        </div>
+        <div className="add-category-price">
+          <div className="add-category flex-col">
+            <p>Product Category</p>
+            <select name="category">
+              <option value="Salad"></option>
+              <option value="Rolls"></option>
+              <option value="Deserts"></option>
+              <option value="Sandwich"></option>
+              <option value="Cake"></option>
+              <option value="Pure Veg"></option>
+              <option value="Pasta"></option>
+              <option value="Noodles"></option>
+            </select>
           </div>
-        )}
-
-        <button type="submit" className="add-product-btn">
-          Submit
+          <div className="add-price flex-col">
+            <p>Product Price</p>
+            <input type="number" name="price" placeholder="$20" />
+          </div>
+        </div>
+        <button type="submit" className="add-btn">
+          ADD
         </button>
       </form>
     </div>
