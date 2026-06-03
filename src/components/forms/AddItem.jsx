@@ -37,7 +37,7 @@ const AddItem = () => {
         category: "Salad",
       });
       setImage(false);
-      toast.success(response);
+      toast.success(response.data.message);
     } else {
       toast.error(response.data.message);
     }
