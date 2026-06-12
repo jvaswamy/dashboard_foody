@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import "./AllProducts.css";
 import { API_URL } from "../data/apiPath";
 import axios from "axios";
 import { toast } from "react-toastify";
@@ -43,9 +44,10 @@ const AllProducts = () => {
           <b>Action</b>
         </div>
         {list.map((item, index) => {
+          console.log(item.image);
           return (
             <div className="list-table-format" key={index}>
-              <img src={`${API_URL}/images/` + item.image} alt={item.name} />
+              <img className="product-img" src={item.image} alt={item.name} />
               <p>{item.name}</p>
               <p>{item.category}</p>
               <p>{item.price}</p>
