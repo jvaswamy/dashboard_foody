@@ -28,6 +28,17 @@ const AllProducts = () => {
     }
   };
 
+  // show confirmation modal before deleting
+  const [confirmId, setConfirmId] = useState(null);
+  const confirmDelete = (id) => setConfirmId(id);
+  const cancelDelete = () => setConfirmId(null);
+  const handleConfirm = async () => {
+    if (confirmId) {
+      await removeProduct(confirmId);
+      setConfirmId(null);
+    }
+  };
+
   useEffect(() => {
     getProducts();
   }, []);
@@ -43,21 +54,33 @@ const AllProducts = () => {
           <b>Price</b>
           <b>Action</b>
         </div>
-        {list.map((item, index) => {
-          console.log(item.image);
-          return (
-            <div className="list-table-format" key={index}>
-              <img className="product-img" src={item.image} alt={item.name} />
-              <p>{item.name}</p>
-              <p>{item.category}</p>
-              <p>{item.price}</p>
-              <p className="cursor" onClick={() => removeProduct(item._id)}>
-                X
-              </p>
-            </div>
-          );
-        })}
+        {list.map((item, index) => (
+          <div className="list-table-format" key={index}>
+            <img className="product-img" src={item.image} alt={item.name} />
+            <p>{item.name}</p>
+            <p>{item.category}</p>
+            <p>{item.price}</p>
+            <p className="cursor" onClick={() => confirmDelete(item._id)}>
+              X
+            </p>
+          </div>
+        ))}
       </div>
+      {confirmId && (
+        <div className="confirm-overlay">
+          <div className="confirm-modal">
+            <p>Are you sure you want to delete this product?</p>
+            <div className="confirm-actions">
+              <button className="btn cancel" onClick={cancelDelete}>
+                Cancel
+              </button>
+              <button className="btn confirm" onClick={handleConfirm}>
+                Delete
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

@@ -17,6 +17,7 @@ const Home = () => {
   const [activeLayout, setActiveLayout] = useState("");
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [showFirm, setShowFirm] = useState(false);
+  const [showLogout, setShowLogout] = useState(false);
   const [sidebarOption, setSidebarOption] = useState("");
 
   const navigate = useNavigate();
@@ -81,8 +82,13 @@ const Home = () => {
           )}
         </div>
         <div className="navbar-right">
-          <img src={assets.profile_image} alt="" />
-          <button onClick={handleLogout}>Logout</button>
+          <img
+            src={assets.profile_image}
+            alt=""
+            onClick={() => setShowLogout((s) => !s)}
+            style={{ cursor: "pointer" }}
+          />
+          {showLogout && <button onClick={handleLogout}>Logout</button>}
         </div>
       </nav>
       <div className="main-container">

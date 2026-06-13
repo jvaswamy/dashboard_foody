@@ -37,7 +37,7 @@ const AddProduct = () => {
           setFirmsError(data.message || "Failed to load firms");
         }
       } catch (error) {
-        console.log("Error fetching firms", error);
+        console.error("Error fetching firms", error);
         setFirms([]);
         setFirmsError("Failed to load firms");
       } finally {
@@ -143,7 +143,7 @@ const AddProduct = () => {
         fileInput.value = "";
       }
     } catch (error) {
-      console.log("Error", error);
+      console.error("Error adding product", error);
       alert(error.message);
     }
   };

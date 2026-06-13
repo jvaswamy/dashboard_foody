@@ -10,3 +10,53 @@
 .list-table-format img {
   margin-right: 12px;
 }
+
+/* confirmation modal */
+.confirm-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2000;
+}
+.confirm-modal {
+  background: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  width: min(90%, 420px);
+  text-align: center;
+}
+.confirm-actions {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  margin-top: 16px;
+}
+.confirm-actions .btn {
+  padding: 8px 14px;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+}
+.confirm-actions .btn.cancel {
+  background: #eee;
+}
+.confirm-actions .btn.confirm {
+  background: tomato;
+  color: white;
+}
+
+/* responsive table */
+@media (max-width: 800px) {
+  .list-table-format {
+    display: grid;
+    grid-template-columns: 80px 1fr;
+    gap: 8px;
+    align-items: center;
+  }
+  .list-table-format p {
+    margin: 0;
+  }
+}

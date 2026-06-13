@@ -12,6 +12,7 @@ const AddItem = () => {
     price: "",
     category: "Salad",
   });
+  const [isUploading, setIsUploading] = useState(false);
 
   const onChangeHandler = (event) => {
     const { name, value } = event.target;
@@ -20,6 +21,7 @@ const AddItem = () => {
 
   const onSubmitHandler = async (event) => {
     event.preventDefault();
+    setIsUploading(true);
     const formData = new FormData();
     formData.append("name", data.name);
     formData.append("description", data.description);
@@ -41,6 +43,7 @@ const AddItem = () => {
     } else {
       toast.error(response.data.message);
     }
+    setIsUploading(false);
   };
 
   // useEffect(() => {
@@ -116,8 +119,14 @@ const AddItem = () => {
             />
           </div>
         </div>
-        <button type="submit" className="add-btn">
-          ADD
+        <button
+          type="submit"
+          className={`add-btn ${
+            !(image && data.name && data.description && data.price) ? "disabled" : ""
+          }`}
+          disabled={!(image && data.name && data.description && data.price) || isUploading}
+        >
+          {isUploading ? <span className="spinner" /> : "ADD"}
         </button>
       </form>
     </div>
